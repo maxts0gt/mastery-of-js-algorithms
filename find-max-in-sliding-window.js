@@ -27,22 +27,28 @@ const findMaxInSlidingWindow = (array, w) => {
 	// appending the largest element to the result
 	result.push(array[window[0]]);
 	// remove all numbers that are smaller than current number from tail of list
-	for (let i = windowSize; i < nums.length; i++) {
+	for (let i = w; i < array.length; i++) {
 		while (
 			window.length > 0 &&
-			array[i] >= nums[window[window.length - 1]]
+			array[i] >= array[window[window.length - 1]]
 		) {
 			window.pop();
 		}
 
 		// remove the first index from window deque
-		if (window.length > 0 && window[0] < i - windowSize) {
+		if (window.length > 0 && window[0] < i - w) {
 			window.shift();
 		}
 		// add current element at the back of queue
 		window.push(i);
-		result.push(nums[window[0]]);
+		result.push(array[window[0]]);
 	}
 	// and finally return result
 	return result;
 };
+
+let numsList = [
+	10, 6, 9, -3, 23, -1, 34, 56, 67, -1, -4, -8, -2, 9, 10, 34, 67,
+];
+
+console.log(findMaxInSlidingWindow(numsList, 15));
