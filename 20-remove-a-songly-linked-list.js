@@ -1,3 +1,5 @@
+// Time O(n) | Space O(1)
+
 const reverse = (head) => {
 	// if head is null or only 1 node, then return
 	if (!head || !head.next) {
@@ -24,4 +26,26 @@ const reverse = (head) => {
 	}
 	// after that just return the reversed list
 	return reversedList;
+};
+
+// Time O(n) | Space O(n)
+
+// recursive method
+let reverse2 = () => {
+	// check if has value or 1
+	if (!head || !head.next) {
+		return head;
+	}
+
+	// create reversehead which we will return in the end
+	let reverseHead = reverse(head.next);
+
+	// set the head.next.next = head
+	head.next.next = head;
+
+	// set the head.next = null
+	head.next = null;
+
+	// and return result. voila
+	return reverseHead;
 };
